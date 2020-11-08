@@ -1,0 +1,5 @@
+FAMILY_NAME,GIVEN_NAME,BIRTH_DATE,UID_1,UID_2,ADDRESS,PHONE,EMAIL
+Smith,Rob,15/05/1970,100001,50001,1 High Street Belrose NSW,04-12340001,rob.smith@gmail.com
+Smith,Robert,15/05/1970,100012,50001,2 High Street Belrose NSW,04-12340001,robert.smith@gmail.com
+Taylor,Elizabeth,12/08/1980,100801,50801,100 Baker Avenue ACT,04-67890001,elizabeth.taylor@hotmail.com
+Taylor,Liz,12/08/1980,100812,50801,100 Baker Avenue ACT,04-67895001,liz.taylor@hotmail.com

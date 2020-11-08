@@ -1,0 +1,56 @@
+1. 7zip, extract here
+
+2. Launch Docker
+
+3. Load base image
+   In Powershell, "docker load -i rocker-3.6.3-libs.tar"
+   Check image
+   "docker image ls"
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rocker-3.6.3-libs   20201106            58b9deb283c2        2 days ago          973MB
+
+4. Prepare source code & data for new image
+   Create a new project folder, put in source code and data files to be read
+
+5. Modify "setwd" and "options" in R scripts
+a) # library(shinybusy)
+          # add_busy_bar(timeout =  1000, color = "yellow", height = "8px"),
+          # add_busy_spinner(timeout = 1000, spin = "fading-circle",
+          #                  position = "top-left", color = "yellow"),
+b) setwd('/home/shinyapp1')
+c) options(shiny.port = 7777)
+   options(shiny.host = "0.0.0.0")
+
+6. Create "Dockerfile"
+FROM rocker-3.6.3-libs:20201106
+
+RUN mkdir /home/shinyapp1
+
+COPY *.R /home/shinyapp1
+COPY *.csv /home/shinyapp1
+
+WORKDIR /home/shinyapp1
+
+CMD ["Rscript","shiny-Prototype-test1.R"]
+
+7. Build new image
+In Powershell, switch to project folder
+"docker build -t shiny-prototype-test1:20201108 ."
+"docker image ls"
+REPOSITORY              TAG                 IMAGE ID            CREATED              SIZE
+shiny-prototype-test1   20201108            72e3b9a29d3e        About a minute ago   973MB
+rocker-3.6.3-libs       20201106            58b9deb283c2        2 days ago           973MB
+
+8. Run new Docker image
+"docker run --rm -it -p 0.0.0.0:7777:7777 shiny-prototype-test1:20201108"
+
+9. When see "Listening on http://0.0.0.0:7777"
+   Launch an internet browser, input URL "localhost:7777" or "127.0.0.1:7777"
+
+(To remove image: "docker image rm shiny-prototype-test1:20201108")
+
+
+
+
+
+
